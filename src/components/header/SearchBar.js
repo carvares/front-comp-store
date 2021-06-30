@@ -5,19 +5,21 @@ import UserContext from "../UserContext"
 import { Link } from "react-router-dom"
 
 export default function SearchBar(){
-    const [results, setResults] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
-    const { user } = useContext(UserContext)
 
-    const search = (searchProduct) => {
-        if(searchProduct === ""){
+    const [keyword, setKeyword] = useState("");
+    const [results, setResults] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const { user } = useContext(UserContext);
+
+    const search = (keyword) => {
+        if(keyword === ""){
             setResults(null)
             return
         }
         setIsLoading(true)
         const config = {
             params: {
-                searchProduct: `${searchProduct}`
+                keyword: `${keyword}`
             }
         };
         const request = axios.get(`http://localhost:4000/search`, config)
@@ -32,20 +34,18 @@ export default function SearchBar(){
     }
 
     return(
-        <StyledSearchBar>
+        <StyledSearchBar onSubmit={search} >
             <input 
-                type="search"
+                type="text"
                 placeholder="Procure por produtos incríveis!"
-                onChange={(event) => { 
-                    search(event.target.value)
-                }}
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
             /> 
-
         </StyledSearchBar>
     )
 }
 
-const StyledSearchBar = styled.div`
+const StyledSearchBar = styled.form`
     position: relative;
     display: flex;
     flex-direction: column;

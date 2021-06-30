@@ -3,8 +3,8 @@ import HeaderMenu from "./HeaderMenu";
 import DropdownMenu from "./DropdownMenu";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../../assets/Logo.png"
+import {BsList} from "react-icons/bs";
+
 
 export default function Header() {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
@@ -16,10 +16,11 @@ export default function Header() {
   return (
     <div>
       <StyledHeader>
-        <LogoIcon src={Logo}>
-          
-        </LogoIcon>
-          <SearchBar />
+        <Categories>
+          <span>Produtos</span> <BsList/>
+        </Categories>
+
+        <SearchBar />
         <HeaderMenu
           showDropdownMenu={showDropdownMenu}
           showDropdown={showDropdown}
@@ -47,7 +48,13 @@ const StyledHeader = styled.div`
   z-index: 10;
 `;
 
-const LogoIcon = styled.img`
-  height: 50px;
-  width: 50px;
+const Categories = styled.div`
+  color: #2d3277;
+  font-size: 30px;
+  display: flex;
+  align-itens: center;
+  span{
+    font-family: "Oswald";
+    margin-right: 8px;
+  } 
 `;
