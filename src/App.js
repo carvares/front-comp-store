@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import LogIn from "./components/sign-up/LogIn";
 import ProductsPage from "./components/products/ProductsPage";
 import UserContext from "./components/UserContext";
+import Cart from "./components/cart/Cart";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -36,12 +37,13 @@ export default function App() {
       <Switch>
         <UserContext.Provider value={{ user, setUser }}>
 
-            <Route path={"/"} component={ProductsPage} />
+            <Route path={"/"} exact component={ProductsPage} />
 {/*    
             <Route path="/log-in" exact component={LogIn}></Route>
             <Route path="/sign-up" exact component={SignUp}></Route> */}
 
             {/* <PrivateRoute path={"/my-posts"} component={Mychart} /> */}
+            <Route path= {"/my-cart"} exact component={Cart}/>
 
         </UserContext.Provider>
       </Switch>
