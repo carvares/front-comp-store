@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-loader-spinner";
@@ -49,11 +49,20 @@ export default function LogIn() {
     }
   }
 
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResizeWindow);
+    return () => {
+      window.removeEventListener("resize", handleResizeWindow);
+    };
+  }, []);
+
     return (
         <>
           <Header/>  
           <Card/>
-          <LogInBox>
+          <LogInBox width={width}>
             <h1>Digite o seu e-mail e senha</h1>
             {error ? <div>{error}</div> : null}
             <Form onSubmit={login}>
