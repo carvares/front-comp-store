@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import SignUp from "./components/sign-up/SignUp";
-import LogIn from "./components/login/LogIn";
+import LogIn from "./components/auth/login/LogIn";
 import ProductsPage from "./components/products/ProductsPage";
 import UserContext from "./components/UserContext";
 import { useEffect, useState } from "react";

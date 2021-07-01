@@ -4,11 +4,11 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 
-import Header from "./Header";
-import Form from "./Form";
-import Input from "./Input";
-import Button from "./Button";
-import {API} from "../config/api";
+import Header from "../shared/Header";
+import Form from "../shared/Form";
+import Input from "../shared/Input";
+import Button from "../shared/Button";
+import {API} from "../../config/api";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
