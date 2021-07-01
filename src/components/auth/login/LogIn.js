@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 
@@ -47,14 +47,6 @@ export default function LogIn() {
     } else {
       setError("Senha mínima de 8 caracteres!");
     }
-  }
-
-  function validInfos() {
-    if (password.length < 8) {
-      setError("Senha mínima de 8 caracteres!");
-      return false;
-    }
-    return true;
   }
 
     return (

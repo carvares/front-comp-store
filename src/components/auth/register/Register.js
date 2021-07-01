@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-loader-spinner";
@@ -75,68 +75,141 @@ export default function Register() {
     else return false;
   } 
 
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResizeWindow);
+    return () => {
+      window.removeEventListener("resize", handleResizeWindow);
+    };
+  }, []);
+
     return (
         <>
           <Header/>
-          <Card/>
-          <RegisterBox>
+          {width > 720
+            ? 
+            <Card/>
+            :
+            null
+          }
+          <RegisterBox width={width}>
             <h1>Digite o seu e-mail e senha</h1>
             {error ? <div>{error}</div> : null}
             <Form onSubmit={register}>
-                <div>
-                    <Input
-                    placeholder={"Nome"}
-                    type={"text"}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    border={"none"}
-                    borderBottom={"1px solid gray"}
-                    />
-                    <span/>
-                    <Input
-                    placeholder={"CPF"}
-                    type={"number"}
-                    value={cpf}
-                    onChange={(e) => setCPF(e.target.value)}
-                    required
-                    border={"none"}
-                    borderBottom={"1px solid gray"}
-                    />
-                </div>
-                <div>
-                    <Input
-                    placeholder={"E-mail"}
-                    type={"email"}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    border={"none"}
-                    borderBottom={"1px solid gray"}
-                    />
-                </div>
-                <div>
-                    <Input
-                    placeholder={"Senha"}
-                    type={"password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    border={"none"}
-                    borderBottom={"1px solid gray"}
-                    />
-                    <span/>
-                    <Input
-                    placeholder={"Confirme a senha"}
-                    type={"password"}
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    id={"confirm"}
-                    required
-                    border={"none"}
-                    borderBottom={"1px solid gray"}
-                    />
-                </div>
+                { width > 720 
+                  ?
+                  <>
+                    <div>
+                        <Input
+                        placeholder={"Nome"}
+                        type={"text"}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        />
+                        <span/>
+                        <Input
+                        placeholder={"CPF"}
+                        type={"number"}
+                        value={cpf}
+                        onChange={(e) => setCPF(e.target.value)}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        />
+                    </div>
+                    <div>
+                        <Input
+                        placeholder={"E-mail"}
+                        type={"email"}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        />
+                    </div>
+                    <div>
+                        <Input
+                        placeholder={"Senha"}
+                        type={"password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        />
+                        <span/>
+                        <Input
+                        placeholder={"Confirme a senha"}
+                        type={"password"}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        id={"confirm"}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        />
+                    </div>
+                  </>
+                  :
+                  <>
+                        <Input
+                        placeholder={"Nome"}
+                        type={"text"}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        margin={"0px 0px 20px"}
+                        />
+                        <Input
+                        placeholder={"CPF"}
+                        type={"number"}
+                        value={cpf}
+                        onChange={(e) => setCPF(e.target.value)}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        margin={"0px 0px 20px"}
+                        />
+                        <Input
+                        placeholder={"E-mail"}
+                        type={"email"}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        margin={"0px 0px 20px"}
+                        />
+                        <Input
+                        placeholder={"Senha"}
+                        type={"password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        margin={"0px 0px 20px"}
+                        />
+                        <Input
+                        placeholder={"Confirme a senha"}
+                        type={"password"}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        id={"confirm"}
+                        required
+                        border={"none"}
+                        borderBottom={"1px solid gray"}
+                        margin={"0px 0px 20px"}
+                        />
+                  </>
+                }
                 <Button
                 type={"submit"}
                 text={

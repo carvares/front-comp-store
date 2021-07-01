@@ -45,11 +45,11 @@ export const LogInBox =  styled.div`
 `;
 
 export const RegisterBox =  styled.div`
-    width: 720px;
+    width: ${props => props.width > 720 ? "720px" : "100%"};
     background: white;
     position: fixed;
-    top: 15%;
-    left: calc(50% - 360px);
+    top: ${props => props.width > 720 ? "15%" : "72px"};
+    left: ${props => props.width > 720 ? "calc(50% - 360px)" : "0px"};
     border-radius: 5px;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.15);
     color: black;
