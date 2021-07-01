@@ -15,7 +15,7 @@ export default function Input(props) {
     margin,
     border,
     borderBottom,
-    borderRadius
+    borderRadius,
   } = props;
   return (
     <InputWrapper
@@ -40,10 +40,10 @@ export default function Input(props) {
 const InputWrapper = styled.input`
   width: 100%;
   height: 50px;
-  border-radius: ${props => props.borderRadius ? props.borderRadius : ""};
-  margin: ${props => props.margin ? props.margin : "0px"};
-  border: ${props => props.border ? props.border : "1px solid gray"};
-  border-bottom: ${props => props.borderBottom ? props.borderBottom : ""};
+  border-radius: ${(props) => (props.borderRadius ? props.borderRadius : "")};
+  margin: ${(props) => (props.margin ? props.margin : "0px")};
+  border: ${(props) => (props.border ? props.border : "1px solid gray")};
+  border-bottom: ${(props) => (props.borderBottom ? props.borderBottom : "")};
   padding-left: 15px;
   font-size: 20px;
   -webkit-appearance: none;

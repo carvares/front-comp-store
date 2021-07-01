@@ -1,12 +1,7 @@
 import styled from "styled-components";
 
 export default function Header() {
-
-  return (
-      <StyledHeader>
-        Comp Store
-      </StyledHeader>
-  );
+  return <StyledHeader>Comp Store</StyledHeader>;
 }
 
 const StyledHeader = styled.header`
