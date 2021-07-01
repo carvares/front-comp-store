@@ -12,6 +12,10 @@ export default function Input(props) {
     name,
     min,
     max,
+    margin,
+    border,
+    borderBottom,
+    borderRadius
   } = props;
   return (
     <InputWrapper
@@ -25,6 +29,10 @@ export default function Input(props) {
       max={max}
       id={id}
       name={name}
+      margin={margin}
+      border={border}
+      borderBottom={borderBottom}
+      borderRadius={borderRadius}
     />
   );
 }
@@ -32,19 +40,13 @@ export default function Input(props) {
 const InputWrapper = styled.input`
   width: 100%;
   height: 50px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  border: 1px solid gray;
+  border-radius: ${props => props.borderRadius ? props.borderRadius : ""};
+  margin: ${props => props.margin ? props.margin : "0px"};
+  border: ${props => props.border ? props.border : "1px solid gray"};
+  border-bottom: ${props => props.borderBottom ? props.borderBottom : ""};
   padding-left: 15px;
   font-size: 20px;
   -webkit-appearance: none;
   -moz-appearance: textfield;
-
-  &:valid {
-    border: 2px solid green;
-  }
-
-  input:invalid {
-    border: 2px solid red;
-  }
+  outline: none;
 `;

@@ -2,17 +2,19 @@ import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-loader-spinner";
+import cpfTools from 'cpf';
 
 import Header from "../shared/Header";
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
-import { GrayBox, LogInBox } from "../shared/style"
+import { GrayBox, Card, RegisterBox } from "../shared/style"
 import {API} from "../../config/api";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [cpf, setCPF] = useState(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loader, setLoader] = useState(false);
@@ -26,6 +28,7 @@ export default function Register() {
         setLoader(true);
         await axios.post(`${API}/api/register`, {
           name,
+          cpf,
           email,
           password,
         });
@@ -35,7 +38,7 @@ export default function Register() {
           error.hasOwnProperty("message") &&
           error.message === "Network Error"
         )
-          setError("Não foi possvel conectar ao servidor!");
+          setError("Não foi possivel conectar ao servidor!");
         if (error.response !== undefined && error.response.status === 409)
           setError("Usuario já cadastrado!");
         if (error.response !== undefined && error.response.status === 400)
@@ -51,6 +54,10 @@ export default function Register() {
       setError("Nome mínimo de 3 caracteres!");
       return false;
     }
+    if (!cpfValidator(cpf)) {
+        setError("CPF inválido!");
+        return false;
+      }
     if (password !== confirmPassword) {
       setError("As senhas não coincidem!");
       return false;
@@ -62,41 +69,74 @@ export default function Register() {
     return true;
   }
 
+  function cpfValidator (value, _) {
+    const formated = cpfTools.format(value)
+    if (cpfTools.isValid(formated)) return true;
+    else return false;
+  } 
+
     return (
         <>
-          <Header/>  
-          <LogInBox>
+          <Header/>
+          <Card/>
+          <RegisterBox>
             <h1>Digite o seu e-mail e senha</h1>
+            {error ? <div>{error}</div> : null}
             <Form onSubmit={register}>
-                <Input
-                placeholder={"Nome"}
-                type={"text"}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                />
-                <Input
-                placeholder={"E-mail"}
-                type={"email"}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                />
-                <Input
-                placeholder={"Senha"}
-                type={"password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                />
-                <Input
-                placeholder={"Confirme a senha"}
-                type={"password"}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                id={"confirm"}
-                required
-                />
+                <div>
+                    <Input
+                    placeholder={"Nome"}
+                    type={"text"}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    border={"none"}
+                    borderBottom={"1px solid gray"}
+                    />
+                    <span/>
+                    <Input
+                    placeholder={"CPF"}
+                    type={"number"}
+                    value={cpf}
+                    onChange={(e) => setCPF(e.target.value)}
+                    required
+                    border={"none"}
+                    borderBottom={"1px solid gray"}
+                    />
+                </div>
+                <div>
+                    <Input
+                    placeholder={"E-mail"}
+                    type={"email"}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    border={"none"}
+                    borderBottom={"1px solid gray"}
+                    />
+                </div>
+                <div>
+                    <Input
+                    placeholder={"Senha"}
+                    type={"password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    border={"none"}
+                    borderBottom={"1px solid gray"}
+                    />
+                    <span/>
+                    <Input
+                    placeholder={"Confirme a senha"}
+                    type={"password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    id={"confirm"}
+                    required
+                    border={"none"}
+                    borderBottom={"1px solid gray"}
+                    />
+                </div>
                 <Button
                 type={"submit"}
                 text={
@@ -107,8 +147,14 @@ export default function Register() {
                     )
                 }
                 />
+                <Button
+                text={"Já possui conta? Faça login!"}
+                background={"#FFF"}
+                color={"#3483fa"}
+                onClick={() => history.push("/login")}
+                />
             </Form>
-            </LogInBox>
+            </RegisterBox>
           <GrayBox/>
         </>
     );

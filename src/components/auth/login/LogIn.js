@@ -61,6 +61,8 @@ export default function LogIn() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                margin={"0px 0px 20px"}
+                borderRadius={"5px"}
               />
               <Input
                 placeholder={"Senha"}
@@ -68,6 +70,8 @@ export default function LogIn() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                margin={"0px 0px 20px"}
+                borderRadius={"5px"}
               />
               <Button
                 type={"submit"}
