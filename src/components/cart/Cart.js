@@ -3,33 +3,44 @@ import styled from "styled-components"
 import axios from "axios"
 import ItemToBuy from "./ItemToBuy";
 import { useEffect, useState } from "react";
+import Checkout from "../checkout/Checkout";
 
 
 
 export default function Cart() {
     const [total, setTotal] = useState(0);
-    //const promisse  = axios.get()
-    useEffect(()=>{},[total])
-    const products =
-        [
-            { "id": 1, "description": "Placa de video Geforce RTX 3060", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "660000", "category": "placas", "qtd":"1" },
-            { "id": 2, "description": "Headset Gamer HyperX Cloud Stinger", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "50000", "category": "perifericos", "qtd":"2" },
-            { "id": 3, "description": "Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "120000", "category": "monitores", "qtd":"3" },
-            { "id": 4, "description": "SSD Kingston A400", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "30000", "category": "memorias", "qtd":"4"}
-        ];
+    const [modal, setModal] = useState(false)
+    const [products, setProducts] = useState([])
+
+    const config = {
+        headers: {
+            "Authorization": `Bearer teste`
+        }
+    }
+    useEffect(() => {
+        const promisse = axios.get('http://localhost:4000/api/cart', config);
+        promisse.then(r => {setProducts(r.data);console.log(r.data)} )
+    }, [])
+
+
+    const finalPrice = products.reduce((acc, current) => acc + (parseInt(current.price) * parseInt(current.amount)), 0)
+    useEffect(() => setTotal(finalPrice), [products])
 
     return (
         <>
             <Header />
-            <Container>
+            {modal ? <Checkout total={total} setModal={setModal} /> : null}
+            <Container total={total}>
+
                 <ul>
                     {products.map((each) => (
                         <ItemToBuy item={each} setTotal={setTotal} total={total} key={each.id} />
                     ))}
                 </ul>
                 <div>
-                    <p2> Total:</p2>
-                    <p3>{(total / 100).toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' })}</p3>
+                    <h2> Total:</h2>
+                    <button onClick={() => total > 0 ? setModal(!modal) : null}>Finalizar compra</button>
+                    <h3>{(total / 100).toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' })}</h3>
                 </div>
             </Container>
         </>
@@ -47,13 +58,17 @@ const Container = styled.div`
         width: 100px;
         height: auto;
     }
+    ul{
+        height: 75vh;
+        overflow-y: scroll;
     li{
         display: flex;
         align-items: center;
+        justify-content: space-between;
         margin: 10px 0 0 10px;
         img{
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             margin: 10px 50px 0 20px;
         }
@@ -63,12 +78,14 @@ const Container = styled.div`
             align-items: center;
         }
         p{
-            width: 400px;
+            width: 300px;
             
         }
-        p1{
+        h4{
             text-align: end;
             width: 350px;
+            margin: 0 30px;
+
         }
         svg{
             width: 25px;
@@ -76,6 +93,8 @@ const Container = styled.div`
             margin: 0 10px;
             cursor: pointer;
         }
+        
+    }
     }
     div{
         position: absolute;
@@ -83,8 +102,30 @@ const Container = styled.div`
         left: 10px;
         right: 0;
         font-size: 20px;
-        p2{
-            margin: 0 0 0  10px;
+        display: flex;
+        justify-content: space-between;
+        
+        h2{
+            margin: 0 10px;
+            width: 200px;
+        }
+        h3{
+            width: 200px;
+            margin: 0 20px;
+            text-align: end;
+        }
+        button{
+            width: 250px;
+            height: 30px;
+            border-radius: 30px;
+            border: none;
+            background-color:${props => props.total === 0 ? "rgba (167,050,59, 0.5)" : "#FEE623"};
+            font-size: 18px;
+            font-weight: 600;
+            color: #2D3277;
+            box-shadow: 0px 0px  10px #c0c0c0;
+            cursor: pointer;
+            
         }
     }
 `
