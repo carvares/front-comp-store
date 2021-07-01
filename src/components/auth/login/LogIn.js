@@ -26,7 +26,6 @@ export default function LogIn() {
           email,
           password,
         });
-        console.log(response);
         if (!response.status === 200) throw new Error(response.status);
         //createUser(response.data);
         history.push("/");
@@ -48,12 +47,21 @@ export default function LogIn() {
     }
   }
 
+  function validInfos() {
+    if (password.length < 8) {
+      setError("Senha mínima de 8 caracteres!");
+      return false;
+    }
+    return true;
+  }
+
     return (
         <>
           <Header/>  
           <Card/>
           <LogInBox>
             <h1>Digite o seu e-mail e senha</h1>
+            {error ? <div>{error}</div> : null}
             <Form onSubmit={login}>
               <Input
                 placeholder={"E-mail"}

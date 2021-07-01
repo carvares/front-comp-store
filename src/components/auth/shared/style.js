@@ -27,9 +27,21 @@ export const LogInBox =  styled.div`
     flex-direction: column;
     align-items: center;
 
-& > h1 {
-  margin: 30px 0px 70px;
-}
+    & > h1 {
+    margin: 30px 0px 70px;
+    }
+
+    & > div {
+        display: flex;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 15px;
+        color: red;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const RegisterBox =  styled.div`
