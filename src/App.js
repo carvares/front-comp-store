@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import SignUp from "./components/sign-up/SignUp";
-// import LogIn from "./components/sign-up/LogIn";
+import LogIn from "./components/auth/login/LogIn";
+import Register from "./components/auth/register/Register";
 import ProductsPage from "./components/products/ProductsPage";
 import UserContext from "./components/UserContext";
 import { useEffect, useState } from "react";
@@ -28,18 +29,27 @@ export default function App() {
 
   const [user, setUser] = useState(initialUserState); 
 
+  const createUser = (user) => {
+		localStorage.setItem('user', JSON.stringify(user));
+		setUser(user);
+	};
 
+	const removeUser = () => {
+		localStorage.removeItem('user');
+		setUser(null);
+	};
 
   return (
     <BrowserRouter>
 
       <Switch>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, createUser, removeUser }}>
 
-            <Route path={"/"} component={ProductsPage} />
-{/*    
-            <Route path="/log-in" exact component={LogIn}></Route>
-            <Route path="/sign-up" exact component={SignUp}></Route> */}
+            <Route path={"/"} exact component={ProductsPage} />
+   
+            <Route path={"/login"} exact component={LogIn} />
+
+            <Route path={"/register"} exact component={Register} />
 
             {/* <PrivateRoute path={"/my-posts"} component={Mychart} /> */}
 
