@@ -89,7 +89,7 @@ export default function Register() {
       <Header />
       {width > 720 ? <Card /> : null}
       <RegisterBox width={width}>
-        <h1>Digite o seu e-mail e senha</h1>
+        <h1>Preencha seus dados</h1>
         {error ? <div>{error}</div> : null}
         <Form onSubmit={register}>
           {width > 720 ? (
