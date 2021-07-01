@@ -7,8 +7,8 @@ import Header from "../shared/Header";
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
-import { GrayBox, Card, LogInBox } from "../shared/style"
-import {API} from "../../config/api";
+import { GrayBox, Card, LogInBox } from "../shared/style";
+import { API } from "../../config/api";
 import UserContext from "../../UserContext";
 
 export default function LogIn() {
@@ -58,51 +58,53 @@ export default function LogIn() {
     };
   }, []);
 
-    return (
-        <>
-          <Header/>  
-          <Card/>
-          <LogInBox width={width}>
-            <h1>Digite o seu e-mail e senha</h1>
-            {error ? <div>{error}</div> : null}
-            <Form onSubmit={login}>
-              <Input
-                placeholder={"E-mail"}
-                type={"email"}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                margin={"0px 0px 20px"}
-                borderRadius={"5px"}
-              />
-              <Input
-                placeholder={"Senha"}
-                type={"password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                margin={"0px 0px 20px"}
-                borderRadius={"5px"}
-              />
-              <Button
-                type={"submit"}
-                text={
-                  loader ? (
-                    <Loader type="ThreeDots" color="#FFF" height={46} width={46} />
-                  ) : (
-                    "Entrar"
-                  )
-                }
-              />
-            </Form>
-            <Button
-                text={"Crie sua conta!"}
-                background={"#FFF"}
-                color={"#3483fa"}
-                onClick={() => history.push("/register")}
-              />
-          </LogInBox>
-          <GrayBox/>
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <Card />
+      <LogInBox width={width}>
+        <h1>Digite o seu e-mail e senha</h1>
+        {error ? <div>{error}</div> : null}
+        <Form onSubmit={login}>
+          <Input
+            placeholder={"E-mail"}
+            type={"email"}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            margin={"0px 0px 20px"}
+            border={"none"}
+            borderBottom={"1px solid gray"}
+          />
+          <Input
+            placeholder={"Senha"}
+            type={"password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            margin={"0px 0px 20px"}
+            border={"none"}
+            borderBottom={"1px solid gray"}
+          />
+          <Button
+            type={"submit"}
+            text={
+              loader ? (
+                <Loader type="ThreeDots" color="#FFF" height={46} width={46} />
+              ) : (
+                "Entrar"
+              )
+            }
+          />
+        </Form>
+        <Button
+          text={"Crie sua conta!"}
+          background={"#FFF"}
+          color={"#3483fa"}
+          onClick={() => history.push("/register")}
+        />
+      </LogInBox>
+      <GrayBox />
+    </>
+  );
 }

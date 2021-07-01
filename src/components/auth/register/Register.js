@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-loader-spinner";
-import cpfTools from 'cpf';
+import cpfTools from "cpf";
 
 import Header from "../shared/Header";
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
-import { GrayBox, Card, RegisterBox } from "../shared/style"
-import {API} from "../../config/api";
+import { GrayBox, Card, RegisterBox } from "../shared/style";
+import { API } from "../../config/api";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [cpf, setCPF] = useState(null);
+  const [cpf, setCPF] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loader, setLoader] = useState(false);
@@ -55,9 +55,9 @@ export default function Register() {
       return false;
     }
     if (!cpfValidator(cpf)) {
-        setError("CPF inválido!");
-        return false;
-      }
+      setError("CPF inválido!");
+      return false;
+    }
     if (password !== confirmPassword) {
       setError("As senhas não coincidem!");
       return false;
@@ -69,11 +69,11 @@ export default function Register() {
     return true;
   }
 
-  function cpfValidator (value, _) {
-    const formated = cpfTools.format(value)
+  function cpfValidator(value, _) {
+    const formated = cpfTools.format(value);
     if (cpfTools.isValid(formated)) return true;
     else return false;
-  } 
+  }
 
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
@@ -84,151 +84,145 @@ export default function Register() {
     };
   }, []);
 
-    return (
-        <>
-          <Header/>
-          {width > 720
-            ? 
-            <Card/>
-            :
-            null
-          }
-          <RegisterBox width={width}>
-            <h1>Digite o seu e-mail e senha</h1>
-            {error ? <div>{error}</div> : null}
-            <Form onSubmit={register}>
-                { width > 720 
-                  ?
-                  <>
-                    <div>
-                        <Input
-                        placeholder={"Nome"}
-                        type={"text"}
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        />
-                        <span/>
-                        <Input
-                        placeholder={"CPF"}
-                        type={"number"}
-                        value={cpf}
-                        onChange={(e) => setCPF(e.target.value)}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        />
-                    </div>
-                    <div>
-                        <Input
-                        placeholder={"E-mail"}
-                        type={"email"}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        />
-                    </div>
-                    <div>
-                        <Input
-                        placeholder={"Senha"}
-                        type={"password"}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        />
-                        <span/>
-                        <Input
-                        placeholder={"Confirme a senha"}
-                        type={"password"}
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        id={"confirm"}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        />
-                    </div>
-                  </>
-                  :
-                  <>
-                        <Input
-                        placeholder={"Nome"}
-                        type={"text"}
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        margin={"0px 0px 20px"}
-                        />
-                        <Input
-                        placeholder={"CPF"}
-                        type={"number"}
-                        value={cpf}
-                        onChange={(e) => setCPF(e.target.value)}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        margin={"0px 0px 20px"}
-                        />
-                        <Input
-                        placeholder={"E-mail"}
-                        type={"email"}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        margin={"0px 0px 20px"}
-                        />
-                        <Input
-                        placeholder={"Senha"}
-                        type={"password"}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        margin={"0px 0px 20px"}
-                        />
-                        <Input
-                        placeholder={"Confirme a senha"}
-                        type={"password"}
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        id={"confirm"}
-                        required
-                        border={"none"}
-                        borderBottom={"1px solid gray"}
-                        margin={"0px 0px 20px"}
-                        />
-                  </>
-                }
-                <Button
-                type={"submit"}
-                text={
-                    loader ? (
-                    <Loader type="ThreeDots" color="#FFF" height={46} width={46} />
-                    ) : (
-                    "Cadastrar"
-                    )
-                }
+  return (
+    <>
+      <Header />
+      {width > 720 ? <Card /> : null}
+      <RegisterBox width={width}>
+        <h1>Preencha seus dados</h1>
+        {error ? <div>{error}</div> : null}
+        <Form onSubmit={register}>
+          {width > 720 ? (
+            <>
+              <div>
+                <Input
+                  placeholder={"Nome"}
+                  type={"text"}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  border={"none"}
+                  borderBottom={"1px solid gray"}
                 />
-                <Button
-                text={"Já possui conta? Faça login!"}
-                background={"#FFF"}
-                color={"#3483fa"}
-                onClick={() => history.push("/login")}
+                <span />
+                <Input
+                  placeholder={"CPF"}
+                  type={"number"}
+                  value={cpf}
+                  onChange={(e) => setCPF(e.target.value)}
+                  required
+                  border={"none"}
+                  borderBottom={"1px solid gray"}
                 />
-            </Form>
-            </RegisterBox>
-          <GrayBox/>
-        </>
-    );
+              </div>
+              <div>
+                <Input
+                  placeholder={"E-mail"}
+                  type={"email"}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  border={"none"}
+                  borderBottom={"1px solid gray"}
+                />
+              </div>
+              <div>
+                <Input
+                  placeholder={"Senha"}
+                  type={"password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  border={"none"}
+                  borderBottom={"1px solid gray"}
+                />
+                <span />
+                <Input
+                  placeholder={"Confirme a senha"}
+                  type={"password"}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  id={"confirm"}
+                  required
+                  border={"none"}
+                  borderBottom={"1px solid gray"}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <Input
+                placeholder={"Nome"}
+                type={"text"}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                border={"none"}
+                borderBottom={"1px solid gray"}
+                margin={"0px 0px 20px"}
+              />
+              <Input
+                placeholder={"CPF"}
+                type={"number"}
+                value={cpf}
+                onChange={(e) => setCPF(e.target.value)}
+                required
+                border={"none"}
+                borderBottom={"1px solid gray"}
+                margin={"0px 0px 20px"}
+              />
+              <Input
+                placeholder={"E-mail"}
+                type={"email"}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                border={"none"}
+                borderBottom={"1px solid gray"}
+                margin={"0px 0px 20px"}
+              />
+              <Input
+                placeholder={"Senha"}
+                type={"password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                border={"none"}
+                borderBottom={"1px solid gray"}
+                margin={"0px 0px 20px"}
+              />
+              <Input
+                placeholder={"Confirme a senha"}
+                type={"password"}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                id={"confirm"}
+                required
+                border={"none"}
+                borderBottom={"1px solid gray"}
+                margin={"0px 0px 20px"}
+              />
+            </>
+          )}
+          <Button
+            type={"submit"}
+            text={
+              loader ? (
+                <Loader type="ThreeDots" color="#FFF" height={46} width={46} />
+              ) : (
+                "Cadastrar"
+              )
+            }
+          />
+          <Button
+            text={"Já possui conta? Faça login!"}
+            background={"#FFF"}
+            color={"#3483fa"}
+            onClick={() => history.push("/login")}
+          />
+        </Form>
+      </RegisterBox>
+      <GrayBox />
+    </>
+  );
 }
