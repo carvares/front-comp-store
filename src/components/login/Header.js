@@ -4,19 +4,20 @@ export default function Header() {
 
   return (
       <StyledHeader>
+        Comp Store
       </StyledHeader>
   );
 }
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
   height: 72px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: #fff059;
   color: #2d3277;
-  padding: 0 30px;
+  font-size: 40px;
 `;
