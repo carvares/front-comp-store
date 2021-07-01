@@ -29,13 +29,21 @@ export default function App() {
 
   const [user, setUser] = useState(initialUserState); 
 
+  const createUser = (user) => {
+		localStorage.setItem('user', JSON.stringify(user));
+		setUser(user);
+	};
 
+	const removeUser = () => {
+		localStorage.removeItem('user');
+		setUser(null);
+	};
 
   return (
     <BrowserRouter>
 
       <Switch>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, createUser, removeUser }}>
 
             <Route path={"/"} exact component={ProductsPage} />
    

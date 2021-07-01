@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Loader from "react-loader-spinner";
@@ -9,12 +9,14 @@ import Input from "../shared/Input";
 import Button from "../shared/Button";
 import { GrayBox, Card, LogInBox } from "../shared/style"
 import {API} from "../../config/api";
+import UserContext from "../../UserContext";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
+  const { createUser } = useContext(UserContext);
   const history = useHistory();
 
   async function login(event) {
@@ -27,7 +29,7 @@ export default function LogIn() {
           password,
         });
         if (!response.status === 200) throw new Error(response.status);
-        //createUser(response.data);
+        createUser(response.data);
         history.push("/");
       } catch (error) {
         if (
