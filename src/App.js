@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import SignUp from "./components/sign-up/SignUp";
 import LogIn from "./components/auth/login/LogIn";
+import Register from "./components/auth/register/Register";
 import ProductsPage from "./components/products/ProductsPage";
 import UserContext from "./components/UserContext";
 import { useEffect, useState } from "react";
@@ -40,7 +41,7 @@ export default function App() {
    
             <Route path={"/login"} exact component={LogIn} />
 
-            {/* <Route path="/sign-up" exact component={SignUp}></Route> */}
+            <Route path={"/register"} exact component={Register} />
 
             {/* <PrivateRoute path={"/my-posts"} component={Mychart} /> */}
 
