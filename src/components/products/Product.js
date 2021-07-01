@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import styled from "styled-components";
 
+import UserContext from "../UserContext";
+
 export default function Product(props){
-
-    const {product} = props;
-
+    const { user } = useContext(UserContext);
+    const { product } = props;
     return(
         <ProductCard>
             <img src={product.image} />
