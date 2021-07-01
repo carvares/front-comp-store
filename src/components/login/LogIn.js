@@ -80,6 +80,12 @@ export default function LogIn() {
                 }
               />
             </Form>
+            <Button
+                text={"Crie sua conta!"}
+                background={"#FFF"}
+                color={"#3483fa"}
+                onClick={() => history.push("/register")}
+              />
           </LogInBox>
           <GrayBox/>
         </>
@@ -112,4 +118,8 @@ const LogInBox =  styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & > h1 {
+    margin: 30px 0px 70px;
+  }
 `;

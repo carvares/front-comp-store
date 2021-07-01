@@ -31,11 +31,10 @@ export default function Input(props) {
 
 const InputWrapper = styled.input`
   width: 100%;
-  height: 58px;
-  background: #ffffff;
+  height: 50px;
   border-radius: 5px;
-  margin-bottom: 13px;
-  border: none;
+  margin-bottom: 20px;
+  border: 1px solid gray;
   padding-left: 15px;
   font-size: 20px;
   -webkit-appearance: none;
