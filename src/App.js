@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import SignUp from "./components/sign-up/SignUp";
-// import LogIn from "./components/sign-up/LogIn";
+import LogIn from "./components/login/LogIn";
 import ProductsPage from "./components/products/ProductsPage";
 import UserContext from "./components/UserContext";
 import { useEffect, useState } from "react";
@@ -36,10 +36,11 @@ export default function App() {
       <Switch>
         <UserContext.Provider value={{ user, setUser }}>
 
-            <Route path={"/"} component={ProductsPage} />
-{/*    
-            <Route path="/log-in" exact component={LogIn}></Route>
-            <Route path="/sign-up" exact component={SignUp}></Route> */}
+            <Route path={"/"} exact component={ProductsPage} />
+   
+            <Route path={"/login"} exact component={LogIn} />
+
+            {/* <Route path="/sign-up" exact component={SignUp}></Route> */}
 
             {/* <PrivateRoute path={"/my-posts"} component={Mychart} /> */}
 
