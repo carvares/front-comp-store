@@ -4,6 +4,7 @@ import LogIn from "./components/auth/login/LogIn";
 import Register from "./components/auth/register/Register";
 import ProductsPage from "./components/products/ProductsPage";
 import UserContext from "./components/UserContext";
+import Cart from "./components/cart/Cart";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -52,6 +53,7 @@ export default function App() {
             <Route path={"/register"} exact component={Register} />
 
             {/* <PrivateRoute path={"/my-posts"} component={Mychart} /> */}
+            <Route path= {"/my-cart"} exact component={Cart}/>
 
         </UserContext.Provider>
       </Switch>
