@@ -3,14 +3,19 @@ import styled from "styled-components";
 import {BsFillLightningFill} from "react-icons/bs";
 import {ImTruck} from "react-icons/im";
 import {RiHandCoinLine} from "react-icons/ri"
-
 import UserContext from "../UserContext";
+import { useHistory } from "react-router-dom";
 
 export default function Product(props){
+    
     const { user } = useContext(UserContext);
     const { product } = props;
+    const history = useHistory();
+
+
     return(
-        <ProductCard>
+        <ProductCard onClick={() => history.push(`/product/${product.id}`)}>
+
             <Picture>
               <img src={product.image} />
             </Picture>
@@ -23,6 +28,7 @@ export default function Product(props){
                 <h4><ImTruck/> Entrega rápida </h4>
                 <h5><RiHandCoinLine/> Confira os métodos de pagamento</h5>
             </Description>
+       
             
 
         </ProductCard>
