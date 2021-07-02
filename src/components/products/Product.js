@@ -6,13 +6,19 @@ import {API} from "../config/api";
 import axios from "axios";
 import { useContext } from "react";
 import UserContext from "../UserContext";
+import { useHistory } from "react-router-dom";
 
 export default function Product(props){    
 
     const { product } = props;
     const {user} = useContext(UserContext);
+    const history = useHistory();
 
     async function addToCart(product){
+
+        if(!user){
+            return history.push("/login");
+        }
 
         const config = {
             headers: {
