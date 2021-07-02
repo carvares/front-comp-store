@@ -19,7 +19,7 @@ export default function ProductsPage(){
         <div>
             <Header />
             <Bannner src={Logo} />
-            <Container>
+   
                 {products.length === 0 ? 
                     (
                         <span> Nenhum produto encontrado, recarregue a página</span>
@@ -39,7 +39,6 @@ export default function ProductsPage(){
 
                 
 
-            </Container>
         </div>
 
        
@@ -52,13 +51,13 @@ const Bannner = styled.img`
     width: 100%;
     height: auto;
 `;
-const Container = styled.div`
+
+const ProductsContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 0 auto;
     width: 80vw;
-    height: 100vh;
     margin-top:46px;
-`;
-const ProductsContainer = styled.div`
-    width: 80vw;
-    heigth: 100vw;
 `;
