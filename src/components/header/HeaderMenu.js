@@ -40,11 +40,13 @@ const CartIcon = styled.div`
   overflow: hidden;
   position: relative;
   margin: 0 auto;
+  
     svg{
       width: 40px;
       height: 40px;
       position: absolute;
       bottom: 5px;
       left: 7px;    
+      
     }
 `;

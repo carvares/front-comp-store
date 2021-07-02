@@ -5,7 +5,8 @@ import ItemToBuy from "./ItemToBuy";
 import { useContext, useEffect, useState } from "react";
 import Checkout from "../checkout/Checkout";
 import UserContext from "../UserContext";
-import {API} from "../config/api"
+import { API } from "../config/api"
+import { useHistory } from "react-router";
 
 
 export default function Cart() {
@@ -14,40 +15,55 @@ export default function Cart() {
     const [products, setProducts] = useState([])
     const [done, setDone] = useState(false)
     const { user } = useContext(UserContext)
-    const config = {
-        headers: {
-            "Authorization": `Bearer ${user.token}`
-        }
-    }
+    const history = useHistory();
+
+    
+
     useEffect(() => {
+        if(user){
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            }
+        }
         const promisse = axios.get(`${API}/api/cart`, config);
-        promisse.then(r => { setProducts(r.data) })
+        promisse.then(r => { setProducts(r.data) })}
     }, [])
-
-
     const finalPrice = products.reduce((acc, current) => acc + (parseInt(current.price) * parseInt(current.amount)), 0)
-    useEffect(() => setTotal(finalPrice), [products])
+    useEffect(() => {if(user){setTotal(finalPrice)}}, [products])
 
-    return (
-        <>
-            <Header />
-            {modal ? <Checkout total={total} setModal={setModal} setDone={setDone} /> : null}
-            <Container total={total}>
-                {done ? <Done><h1>Obrigado pela compra!</h1></Done> : null}
-                {products.length === 0?<Done><h1>Carrinho vazio</h1></Done>:null}
-                <ul>
-                    {products.map((each) => (
-                        <ItemToBuy item={each} setTotal={setTotal} total={total} key={each.id} />
-                    ))}
-                </ul>
-                <div>
-                    <h2> Total:</h2>
-                    <button onClick={() => total > 0 ? setModal(!modal) : null}>Finalizar compra</button>
-                    <h3>{(total / 100).toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' })}</h3>
-                </div>
-            </Container>
-        </>
-    )
+    if (user) {
+        
+
+
+
+        
+        
+
+        return (
+            <>
+                <Header />
+                {modal ? <Checkout total={total} setModal={setModal} setDone={setDone} /> : null}
+                <Container total={total}>
+                    {done ? <Done><h1>Obrigado pela compra!</h1></Done> : null}
+                    {products.length === 0 ? <Done><h1>Carrinho vazio</h1></Done> : null}
+                    <ul>
+                        {products.map((each) => (
+                            <ItemToBuy item={each} setTotal={setTotal} total={total} key={each.id} />
+                        ))}
+                    </ul>
+                    <div>
+                        <h2> Total:</h2>
+                        <button onClick={() => total > 0 ? setModal(!modal) : null}>Finalizar compra</button>
+                        <h3>{(total / 100).toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' })}</h3>
+                    </div>
+                </Container>
+            </>
+        )
+    } else {
+        history.push("/login")
+        return null;
+    }
 }
 
 const Container = styled.div`
@@ -139,7 +155,7 @@ top: 0;
 width: 100%;
 height: 100%;
 background-color: #fff;
-z-index: 12;
+z-index: 10;
 display: flex;
 justify-content: center;
 align-items: center;
