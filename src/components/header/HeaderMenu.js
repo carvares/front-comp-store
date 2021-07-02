@@ -1,6 +1,10 @@
 import { IoChevronDown } from "react-icons/io5";
 import styled from "styled-components";
+
 import {FaShoppingCart} from "react-icons/fa";
+
+import UserContext from "../UserContext";
+
 
 export default function HeaderMenu({ showDropdownMenu, showDropdown }) {
   
@@ -10,7 +14,9 @@ export default function HeaderMenu({ showDropdownMenu, showDropdown }) {
         <IoChevronDown onClick={showDropdown} />
       </div>
 
+
       <CartIcon  onClick={showDropdown} />
+
 
 
     </StyledHeaderMenu>
@@ -36,4 +42,5 @@ const CartIcon = styled(FaShoppingCart)`
   overflow: hidden;
   position: relative;
   margin: 0 auto;
+
 `;

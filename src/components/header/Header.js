@@ -58,6 +58,7 @@ const StyledHeader = styled.div`
   color: #2d3277;
   padding: 0 30px;
   z-index: 10;
+  box-shadow: 0px 0px  10px #c0c0c0;
 `;
 
 const Categories = styled.div`
