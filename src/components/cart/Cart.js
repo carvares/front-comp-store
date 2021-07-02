@@ -5,7 +5,7 @@ import ItemToBuy from "./ItemToBuy";
 import { useContext, useEffect, useState } from "react";
 import Checkout from "../checkout/Checkout";
 import UserContext from "../UserContext";
-
+import {API} from "../config/api"
 
 
 export default function Cart() {
@@ -20,7 +20,7 @@ export default function Cart() {
         }
     }
     useEffect(() => {
-        const promisse = axios.get('http://localhost:4000/api/cart', config);
+        const promisse = axios.get(`${API}/api/cart`, config);
         promisse.then(r => { setProducts(r.data) })
     }, [])
 
@@ -34,6 +34,7 @@ export default function Cart() {
             {modal ? <Checkout total={total} setModal={setModal} setDone={setDone} /> : null}
             <Container total={total}>
                 {done ? <Done><h1>Obrigado pela compra!</h1></Done> : null}
+                {products.length === 0?<Done><h1>Carrinho vazio</h1></Done>:null}
                 <ul>
                     {products.map((each) => (
                         <ItemToBuy item={each} setTotal={setTotal} total={total} key={each.id} />

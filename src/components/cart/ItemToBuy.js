@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai"
 import styled from "styled-components"
 import UserContext from "../UserContext"
+import {API} from "../config/api"
 
 export default function ItemToBuy({ item, setTotal, total }) {
     const {user} = useContext(UserContext);
@@ -23,7 +24,7 @@ export default function ItemToBuy({ item, setTotal, total }) {
         setCount(count+1)
         setTotal(total + parseInt(item.price))
         if( count === 0 ){
-            axios.post(`http://localhost:4000/api/cart`,{id: item.productId, amount:1}, config)
+            axios.post(`${API}/api/cart`,{id: item.productId, amount:1}, config)
         }
         
     }
@@ -34,11 +35,11 @@ export default function ItemToBuy({ item, setTotal, total }) {
         
     }
     useEffect(()=>{
-        axios.post('http://localhost:4000/api/edit-cart',{newAmount: count, productId: item.productId},config)
+        axios.post(`${API}/api/edit-cart`,{newAmount: count, productId: item.productId},config)
     },[count])
 
     if(count === 0){
-        axios.delete(`http://localhost:4000/api/cart/${item.productId}`,config)
+        axios.delete(`${API}/api/cart/${item.productId}`,config)
     }
     return (
         <Item count={count}>
