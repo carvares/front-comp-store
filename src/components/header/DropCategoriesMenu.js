@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Category from "./Category";
 
-export default function DropCategoriesMenu ({showCategories, dropMenu, categories, getProducts}){
+export default function DropCategoriesMenu ({showCategories, dropMenu, categories, setcategories}){
 
     const categoriess = [
     {"id":1, "category": "Hardware"}, 
@@ -15,7 +15,7 @@ export default function DropCategoriesMenu ({showCategories, dropMenu, categorie
             <StyledMenu >
 
                 {categoriess.map((c) =>(
-                    <Category key={c.id} category={c.category} getProducts={getProducts} />                       
+                    <Category key={c.id} category={c.category} setcategories={setcategories} />                       
                 ))}             
                 
             </StyledMenu>
