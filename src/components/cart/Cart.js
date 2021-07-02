@@ -12,7 +12,8 @@ export default function Cart() {
     const [total, setTotal] = useState(0);
     const [modal, setModal] = useState(false)
     const [products, setProducts] = useState([])
-    const {user} = useContext(UserContext)
+    const [done, setDone] = useState(false)
+    const { user } = useContext(UserContext)
     const config = {
         headers: {
             "Authorization": `Bearer ${user.token}`
@@ -20,7 +21,7 @@ export default function Cart() {
     }
     useEffect(() => {
         const promisse = axios.get('http://localhost:4000/api/cart', config);
-        promisse.then(r => {setProducts(r.data)} )
+        promisse.then(r => { setProducts(r.data) })
     }, [])
 
 
@@ -30,9 +31,9 @@ export default function Cart() {
     return (
         <>
             <Header />
-            {modal ? <Checkout total={total} setModal={setModal} /> : null}
+            {modal ? <Checkout total={total} setModal={setModal} setDone={setDone} /> : null}
             <Container total={total}>
-
+                {done ? <Done><h1>Obrigado pela compra!</h1></Done> : null}
                 <ul>
                     {products.map((each) => (
                         <ItemToBuy item={each} setTotal={setTotal} total={total} key={each.id} />
@@ -129,4 +130,20 @@ const Container = styled.div`
             
         }
     }
+`
+const Done = styled.div`
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: #fff;
+z-index: 12;
+display: flex;
+justify-content: center;
+align-items: center;
+h1{
+    
+    margin: 0 auto;
+}
 `

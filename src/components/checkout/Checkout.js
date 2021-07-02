@@ -1,19 +1,45 @@
 
+import axios from "axios";
+import { useContext, useState } from "react";
 import styled from "styled-components"
+import {API} from "../config/api"
+import UserContext from "../UserContext";
 
-export default function Checkout({ total, setModal }) {
-    
-    function click(event){
-        console.log("clickou")
-        event.stopPropagation();
+export default function Checkout({ total, setModal, setDone}) {
+    const [cardNumber, setCardNumber] = useState("");
+    const [validDate, setValidDate] = useState("");
+    const [securityCode, setSecurityCode] = useState("");
+    const {user} = useContext(UserContext)
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${user.token}`
+        }
     }
+
+    function endOrder(event){
+        event.preventDefault();
+        event.stopPropagation();
+        const promise = axios.post(`${API}/api/transactions`,{cardNumber,validDate,securityCode, total},config)
+        .then(()=>{console.log("foi");setModal(false)})
+        .catch(console.log("n foi"))
+        setDone(true);
+        
+    }
+    
 
     return (
         <Modal onClick={() => setModal(false)}>
 
             <div onClick={(e)=> e.stopPropagation()}>
                 <h1> Deseja finalizar a compra no valor de {(total / 100).toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' })} ?</h1>
-                <button onClick={(e)=>click(e)}> Finalizar </button>
+                <form onSubmit={(e)=>endOrder(e)}>
+                    <div>
+                    <input type="number" required placeholder="numero do cartão" min="0" max= "9999999999999999" onChange={(e) => setCardNumber(e.target.value)}/>
+                    <input type="text" required placeholder="Data de vencimento" maxLength ="5" onChange={(e) => setValidDate(e.target.value)}/>
+                    <input type="number" required placeholder="Código de segurança" min="0" max = "999" onChange={(e) => setSecurityCode(e.target.value)}/>
+                    </div>
+                    <button type="submit"> Finalizar </button>
+                </form>
             </div>
 
         </Modal>
@@ -32,9 +58,10 @@ const Modal = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    div{
-        width: 40vw;
-        height: 30vh;
+
+    &>div{
+        width: 70vw;
+        height: 60vh;
         background-color: #fff;
         display: flex;
         justify-content: center;
@@ -43,8 +70,22 @@ const Modal = styled.div`
         h1{
             font-size: 20px;
         }
+        
     }
-    button{
+    
+    form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        input{
+            width: 200px;
+            height: 30px;
+            border: none;
+            font-size: 18px;
+            margin: 50px 20px;
+        }
+        button{
             width: 150px;
             height: 25px;
             border-radius: 30px;
@@ -55,8 +96,9 @@ const Modal = styled.div`
             color: #2D3277;
             box-shadow: 0px 0px  10px #c0c0c0;
             cursor: pointer;
-            margin: 100px 0 0 0 ;
+            margin: 50px 0 0 0 ;
             
 
+    }
     }
 `
