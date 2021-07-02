@@ -1,7 +1,7 @@
-import { useEffect } from "react"
-import styled from "styled-components"
+import styled from "styled-components";
+import Category from "./Category";
 
-export default function DropCategoriesMenu ({showCategories, dropMenu, categories}){
+export default function DropCategoriesMenu ({showCategories, dropMenu, categories, getProducts}){
 
     const categoriess = [
     {"id":1, "category": "Hardware"}, 
@@ -15,7 +15,7 @@ export default function DropCategoriesMenu ({showCategories, dropMenu, categorie
             <StyledMenu >
 
                 {categoriess.map((c) =>(
-                    <span>{c.category}</span>
+                    <Category key={c.id} category={c.category} getProducts={getProducts} />                       
                 ))}             
                 
             </StyledMenu>

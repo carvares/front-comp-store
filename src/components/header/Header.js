@@ -7,7 +7,8 @@ import { useState } from "react";
 import {BsList} from "react-icons/bs";
 
 
-export default function Header() {
+export default function Header({categories, getProducts}) {
+  
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
 
@@ -39,6 +40,7 @@ export default function Header() {
       <DropCategoriesMenu
         showCategories={showCategories}
         dropMenu={dropMenu}
+        getProducts={getProducts}
       />
     </div>
   );
