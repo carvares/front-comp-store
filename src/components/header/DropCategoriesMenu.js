@@ -1,19 +1,20 @@
+import { useEffect } from "react"
 import styled from "styled-components"
 
-export default function DropdownMenu ({showCategories, dropMenu}){
+export default function DropCategoriesMenu ({showCategories, dropMenu, categories}){
 
-    const categories = [{"id":1, "category": "Hardware"}, 
+    const categoriess = [
+    {"id":1, "category": "Hardware"}, 
     {"id":2, "category": "Periféricos"}, 
     {"id":3, "category": "Monitores"}, 
     {"id":4, "category": "Consoles"},
     {"id":5, "category": "Smartphones"}, ]
 
-
     return (
         <MenuContainer isEnabled={showCategories} onClick={dropMenu}>
             <StyledMenu >
 
-                {categories.map((c) =>(
+                {categoriess.map((c) =>(
                     <span>{c.category}</span>
                 ))}             
                 

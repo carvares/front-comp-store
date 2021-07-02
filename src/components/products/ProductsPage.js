@@ -2,8 +2,46 @@ import Header from "../header/Header";
 import styled from "styled-components";
 import Logo from "../../assets/Logo.png";
 import Product from "./Product";
+import { useEffect, useState, useContext } from "react";
+import UserContext from "../UserContext";
+import axios from "axios";
+import {API} from "../config/api";
 
 export default function ProductsPage(){
+
+    const { user } = useContext(UserContext);
+    const [productsData, setProducts] = useState([]);
+    const [categories, setcategories] = useState([]);
+
+    useEffect(() => {
+        getProducts();
+        getCategories();
+      }, []);
+
+    async function getProducts(){
+
+        try {            
+            const response = await axios.get(`${API}/api/products`);
+            if (!response.status === 200) throw new Error(response.status);
+            setProducts(response.data);
+
+        } catch (error) {
+            console.log(error);    
+        }
+    }
+
+    async function getCategories(){
+
+        try {            
+            const response = await axios.get(`${API}/api/categories`);
+            if (!response.status === 200) throw new Error(response.status);
+            setcategories(response.data);
+
+        } catch (error) {
+            console.log(error);    
+        }
+    }
+
 
     const products = 
     [
@@ -17,16 +55,10 @@ export default function ProductsPage(){
         {"id":8, "description":"Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "120000", "category": "monitores"}
     ];
 
-    const categories = [{"id":1, "category": "HardWare"}, 
-                        {"id":2, "category": "Periféricos"}, 
-                        {"id":3, "category": "Monitores"}, 
-                        {"id":4, "category": "Consoles"},
-                        {"id":5, "category": "Smartphones"}, ]
-
     return(
 
         <div>
-            <Header />
+            <Header categories={categories} />
             <Bannner src={Logo} />
    
                 {products.length === 0 ? 
@@ -44,12 +76,8 @@ export default function ProductsPage(){
 
                         </ProductsContainer>
                     )
-                }               
-
+                }    
         </div>
-
-       
-        
     );
 }
 
