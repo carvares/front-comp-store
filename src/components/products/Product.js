@@ -1,17 +1,47 @@
 import styled from "styled-components";
 import {BsFillLightningFill} from "react-icons/bs";
 import {ImTruck} from "react-icons/im";
-import {RiHandCoinLine} from "react-icons/ri"
+import {FaShoppingCart} from "react-icons/fa";
+import {API} from "../config/api";
+import axios from "axios";
+import { useContext } from "react";
+import UserContext from "../UserContext";
 import { useHistory } from "react-router-dom";
 
-export default function Product(props){
-    
+export default function Product(props){    
 
     const { product } = props;
+    const {user} = useContext(UserContext);
     const history = useHistory();
 
+    async function addToCart(product){
+
+        if(!user){
+            return history.push("/login");
+        }
+
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            }
+        }
+
+        const body = {
+            "id": product.id,
+            "amount": product.amount
+        }
+        
+        try {
+            const response = await axios.post(`${API}/cart`, body, config );
+            if (!response.status === 200) throw new Error(response.status);
+            
+        } catch(error){
+            console.log(error);
+        }
+    }
+
     return(
-        <ProductCard onClick={() => history.push(`/product/${product.id}`)}>
+        <ProductCard >
 
             <Picture>
               <img src={product.image} alt={product.id}/>
@@ -23,7 +53,7 @@ export default function Product(props){
                 <h3>{product.description}</h3>
                 <h4><BsFillLightningFill/> FULL </h4>
                 <h4><ImTruck/> Entrega rápida </h4>
-                <h5><RiHandCoinLine/> Confira os métodos de pagamento</h5>
+                <h5 onClick={addToCart}><FaShoppingCart/> Add ao carrinho! </h5>
             </Description>           
 
         </ProductCard>
@@ -68,8 +98,13 @@ const Description = styled.div`
         font-size: 15px;
     }
     h5{
-        color: #3483fa;
-        font-size: 13px;
+        border-radius: 3px;
+        color: #000;
+        text-align: center;
+        background: #fee623;
+        font-size: 15px;
+        line-height: 17px;
+        font-weight: bold;
     }
     
 `;
