@@ -1,8 +1,0 @@
-const products =
-        [
-            { "id": 1, "description": "Placa de video Geforce RTX 3060", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "660000", "category": "placas", "qtd": "1" },
-            { "id": 2, "description": "Headset Gamer HyperX Cloud Stinger", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "50000", "category": "perifericos", "qtd": "2" },
-            { "id": 3, "description": "Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "120000", "category": "monitores", "qtd": "3" },
-            { "id": 4, "description": "SSD Kingston A400", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "30000", "category": "memorias", "qtd": "4" }
-
-        ];

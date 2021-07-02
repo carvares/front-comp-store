@@ -2,8 +2,9 @@ import Header from "../header/Header"
 import styled from "styled-components"
 import axios from "axios"
 import ItemToBuy from "./ItemToBuy";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Checkout from "../checkout/Checkout";
+import UserContext from "../UserContext";
 
 
 
@@ -11,15 +12,15 @@ export default function Cart() {
     const [total, setTotal] = useState(0);
     const [modal, setModal] = useState(false)
     const [products, setProducts] = useState([])
-
+    const {user} = useContext(UserContext)
     const config = {
         headers: {
-            "Authorization": `Bearer teste`
+            "Authorization": `Bearer ${user.token}`
         }
     }
     useEffect(() => {
         const promisse = axios.get('http://localhost:4000/api/cart', config);
-        promisse.then(r => {setProducts(r.data);console.log(r.data)} )
+        promisse.then(r => {setProducts(r.data)} )
     }, [])
 
 

@@ -1,12 +1,14 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai"
 import styled from "styled-components"
+import UserContext from "../UserContext"
 
 export default function ItemToBuy({ item, setTotal, total }) {
+    const {user} = useContext(UserContext);
     const config = {
         headers: {
-            "Authorization": `Bearer teste`
+            "Authorization": `Bearer ${user.token}`
         }
     }
 
@@ -20,6 +22,9 @@ export default function ItemToBuy({ item, setTotal, total }) {
     function plus() {
         setCount(count+1)
         setTotal(total + parseInt(item.price))
+        if( count === 0 ){
+            axios.post(`http://localhost:4000/api/cart`,{id: item.productId, amount:1}, config)
+        }
         
     }
 
@@ -29,7 +34,7 @@ export default function ItemToBuy({ item, setTotal, total }) {
         
     }
     useEffect(()=>{
-        axios.post('http://localhost:4000/api/edit-cart',{newAmount: count, productId: item.productId, token:"teste"})
+        axios.post('http://localhost:4000/api/edit-cart',{newAmount: count, productId: item.productId},config)
     },[count])
 
     if(count === 0){

@@ -2,13 +2,18 @@
 import styled from "styled-components"
 
 export default function Checkout({ total, setModal }) {
+    
+    function click(event){
+        console.log("clickou")
+        event.stopPropagation();
+    }
 
     return (
         <Modal onClick={() => setModal(false)}>
 
-            <div>
+            <div onClick={(e)=> e.stopPropagation()}>
                 <h1> Deseja finalizar a compra no valor de {(total / 100).toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' })} ?</h1>
-                <button> Finalizar </button>
+                <button onClick={(e)=>click(e)}> Finalizar </button>
             </div>
 
         </Modal>
