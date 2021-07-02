@@ -1,20 +1,17 @@
-import { useContext } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import styled from "styled-components";
-import UserContext from "../UserContext";
-import Cart from "../../assets/Cart.png";
+import {FaShoppingCart} from "react-icons/fa";
 
 export default function HeaderMenu({ showDropdownMenu, showDropdown }) {
-  const { user } = useContext(UserContext);
+  
   return (
     <StyledHeaderMenu shouldRotate={showDropdownMenu}>
       <div className="chevron">
         <IoChevronDown onClick={showDropdown} />
       </div>
 
-      <CartIcon  onClick={showDropdown} >
-        <img src={Cart} />
-      </CartIcon>
+      <CartIcon  onClick={showDropdown} />
+
 
     </StyledHeaderMenu>
   );
@@ -32,19 +29,11 @@ const StyledHeaderMenu = styled.div`
   }
 `;
 
-const CartIcon = styled.div`
-  background-color: #fff;
-  border-radius: 50%;
-  width: 53px;
-  height: 53px;
+const CartIcon = styled(FaShoppingCart)`
+
+  width: 30px;
+  height: 30px;
   overflow: hidden;
   position: relative;
   margin: 0 auto;
-    img{
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      bottom: 5px;
-      left: 7px;    
-    }
 `;

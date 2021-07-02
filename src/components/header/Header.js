@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import HeaderMenu from "./HeaderMenu";
 import DropdownMenu from "./DropdownMenu";
+import DropCategoriesMenu from "./DropCategoriesMenu";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import {BsList} from "react-icons/bs";
@@ -8,15 +9,20 @@ import {BsList} from "react-icons/bs";
 
 export default function Header() {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
 
   const showDropdown = () => {
     setShowDropdownMenu(!showDropdownMenu);
   };
 
+  const dropMenu = () => {
+    setShowCategories(!showCategories);
+  }
+
   return (
     <div>
       <StyledHeader>
-        <Categories>
+        <Categories onClick={dropMenu} >
           <span>Produtos</span> <BsList/>
         </Categories>
 
@@ -29,6 +35,10 @@ export default function Header() {
       <DropdownMenu
         showDropdownMenu={showDropdownMenu}
         showDropdown={showDropdown}
+      />
+      <DropCategoriesMenu
+        showCategories={showCategories}
+        dropMenu={dropMenu}
       />
     </div>
   );
