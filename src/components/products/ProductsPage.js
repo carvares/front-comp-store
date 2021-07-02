@@ -17,6 +17,12 @@ export default function ProductsPage(){
         {"id":8, "description":"Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "120000", "category": "monitores"}
     ];
 
+    const categories = [{"id":1, "category": "HardWare"}, 
+                        {"id":2, "category": "Periféricos"}, 
+                        {"id":3, "category": "Monitores"}, 
+                        {"id":4, "category": "Consoles"},
+                        {"id":5, "category": "Smartphones"}, ]
+
     return(
 
         <div>
@@ -38,9 +44,7 @@ export default function ProductsPage(){
 
                         </ProductsContainer>
                     )
-                }
-
-                
+                }               
 
         </div>
 
