@@ -42,5 +42,4 @@ const CartIcon = styled(FaShoppingCart)`
   overflow: hidden;
   position: relative;
   margin: 0 auto;
-
 `;

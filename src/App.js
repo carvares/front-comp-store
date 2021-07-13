@@ -39,6 +39,10 @@ export default function App() {
 		localStorage.removeItem('user');
 		setUser(null);
 	};
+  if (!user && !["/login", "/register", "/"].includes(window.location.pathname))
+    window.location.pathname = "/login";
+    else if (user && ["/login", "/register"].includes(window.location.pathname))
+    window.location.pathname = "/";
 
   return (
     <BrowserRouter>
