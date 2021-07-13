@@ -46,13 +46,13 @@ export default function ProductsPage(){
     const products = 
     [
         {"id":1, "description":"Placa de video Geforce RTX 3060", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "660000", "categoryId": 1},
-        {"id":2, "description":"Headset Gamer HyperX Cloud Stinger", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "50000", "categoryId": 2},
-        {"id":3, "description":"Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "120000", "categoryId": 3},
-        {"id":4, "description":"SSD Kingston A400", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "30000", "categoryId": "memorias"},
-        {"id":5, "description":"Headset Gamer HyperX Cloud Stinger", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "50000", "categoryId": 2},
-        {"id":6, "description":"Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "120000", "categoryId": 4},
-        {"id":7, "description":"Headset Gamer HyperX Cloud Stinger", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "50000", "categoryId": 2},
-        {"id":8, "description":"Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "120000", "categoryId": 5}
+        {"id":2, "description":"Headset Gamer HyperX Cloud Stinger", "image": "https://img.terabyteshop.com.br/produto/g/headset-gamer-hyperx-cloudx-xbox-one-35mm-black-hx-hs5cx-sr_114555.jpg", "price": "50000", "categoryId": 2},
+        {"id":3, "description":"Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/21/32/787046566.jpg", "price": "120000", "categoryId": 3},
+        {"id":4, "description":"SSD Kingston A400", "image": "https://images6.kabum.com.br/produtos/fotos/85196/85196_index_g.jpg", "price": "38000", "categoryId": 4},
+        {"id":5, "description":"Placa de video Geforce RTX 3060", "image": "https://i.zst.com.br/thumbs/12/b/31/168342120.jpg", "price": "660000", "categoryId": 1},
+        {"id":6, "description":"Headset Gamer HyperX Cloud Stinger", "image": "https://img.terabyteshop.com.br/produto/g/headset-gamer-hyperx-cloudx-xbox-one-35mm-black-hx-hs5cx-sr_114555.jpg", "price": "50000", "categoryId": 2},
+        {"id":7, "description":"Monitor LED LG 23.8 Wide", "image": "https://i.zst.com.br/thumbs/12/21/32/787046566.jpg", "price": "120000", "categoryId": 3},
+        {"id":8, "description":"SSD Kingston A400", "image": "https://images6.kabum.com.br/produtos/fotos/85196/85196_index_g.jpg", "price": "38000", "categoryId": 4},
     ];
 
     return(
