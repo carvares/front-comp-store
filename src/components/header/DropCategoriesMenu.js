@@ -3,9 +3,6 @@ import Category from "./Category";
 
 export default function DropCategoriesMenu ({showCategories, dropMenu, categories, setcategories}){
 
-    console.log(categories);
-
-
     return (
         <MenuContainer isEnabled={showCategories} onClick={dropMenu}>
             <StyledMenu >
