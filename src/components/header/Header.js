@@ -40,6 +40,7 @@ export default function Header({categories, setcategories}) {
       <DropCategoriesMenu
         showCategories={showCategories}
         dropMenu={dropMenu}
+        categories={categories}
         setcategories={setcategories}
       />
     </div>
