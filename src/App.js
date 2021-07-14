@@ -5,22 +5,8 @@ import Register from "./components/auth/register/Register";
 import ProductsPage from "./components/products/ProductsPage";
 import UserContext from "./components/UserContext";
 import Cart from "./components/cart/Cart";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 
-// const getItensToBuy = (token) => {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-//   const request = axios.get("http://localhost:4000/cart", config);
-
-//   request.catch((err) => {
-//     alert("Houve uma falha ao obter os posts, por favor atualize a página!");
-//   });
-//   return request;
-// };
 
 export default function App() {
 
@@ -56,7 +42,6 @@ export default function App() {
 
             <Route path={"/register"} exact component={Register} />
 
-            {/* <PrivateRoute path={"/my-posts"} component={Mychart} /> */}
             <Route path= {"/my-cart"} exact component={Cart}/>
 
         </UserContext.Provider>

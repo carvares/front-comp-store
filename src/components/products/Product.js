@@ -28,7 +28,7 @@ export default function Product(props){
 
         const body = {
             "id": product.id,
-            "amount": product.amount
+            "amount": 1
         }
         
         try {

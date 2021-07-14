@@ -36,7 +36,7 @@ export default function LogIn() {
           error.hasOwnProperty("message") &&
           error.message === "Network Error"
         )
-          setError("Não foi possvel conectar ao servidor!");
+          setError("Não foi possível conectar ao servidor!");
         if (error.response !== undefined && error.response.status === 400)
           setError("Informações inválidas!");
         if (error.response !== undefined && error.response.status === 404)
