@@ -3,19 +3,12 @@ import Category from "./Category";
 
 export default function DropCategoriesMenu ({showCategories, dropMenu, categories, setcategories}){
 
-    const categoriess = [
-    {"id":1, "category": "Hardware"}, 
-    {"id":2, "category": "Periféricos"}, 
-    {"id":3, "category": "Monitores"}, 
-    {"id":4, "category": "Consoles"},
-    {"id":5, "category": "Smartphones"}, ]
-
     return (
         <MenuContainer isEnabled={showCategories} onClick={dropMenu}>
             <StyledMenu >
 
-                {categoriess.map((c) =>(
-                    <Category key={c.id} category={c.category} setcategories={setcategories} />                       
+                {categories.map((c) =>(
+                    <Category key={c.id} category={c} setcategories={setcategories} />                       
                 ))}             
                 
             </StyledMenu>

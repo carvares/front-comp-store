@@ -1,7 +1,8 @@
 import axios from "axios";
 import {API} from "../config/api";
 
-export default function Category(category, setcategories){
+export default function Category(c, setcategories){
+    
 
     async function changeProductsPage(category){
         try {            
@@ -15,6 +16,6 @@ export default function Category(category, setcategories){
     }   
 
     return(
-        <span onClick={changeProductsPage} >{category.category}</span>
+        <span onClick={changeProductsPage} >{c.category.description}</span>
     );
 }
